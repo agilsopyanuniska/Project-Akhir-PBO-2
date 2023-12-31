@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -37,7 +38,7 @@ public class JabatanAddFrame extends javax.swing.JFrame {
     public JabatanAddFrame(int id_karyawan, String jabatan) {
         initComponents();
         simpanButton.setEnabled(false);
-try {
+    try {
     Connection koneksi = Basisdata.getConnection();
     String findSQL = "SELECT * FROM jabatan WHERE id_karyawan='" + id_karyawan + "' AND jabatan = '" + jabatan + "'";
     Statement statement = koneksi.createStatement();
@@ -219,10 +220,13 @@ try {
     private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanButtonActionPerformed
         Date selectedDateDariTanggal = dariTanggalDatePicker.getDate();
     Date selectedDateSampaiTanggal = sampaiTanggalDatePicker.getDate();
+    if (jabatanTextField.getText().equals("") || selectedDateDariTanggal == null || selectedDateSampaiTanggal == null) {
+    JOptionPane.showMessageDialog(null, "Data Belum Lengkap");
+    return;
+}
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     String formattedDateDariTanggal = sdf.format(selectedDateDariTanggal);
     String formattedDateSampaiTanggal = sdf.format(selectedDateSampaiTanggal);
-    
         
         try {
     Connection koneksi = Basisdata.getConnection();
@@ -234,8 +238,8 @@ try {
     checkStatement.setInt(1, Integer.parseInt(id_karyawan));
     ResultSet checkResult = checkStatement.executeQuery();
 
-    if (jabatan.equals("") || checkResult.next()) {
-        System.out.println("Data sudah ada");
+    if (checkResult.next()) {
+        JOptionPane.showMessageDialog(null, "Data Sudah Ada");
     } else {
         String insertSQL = "INSERT INTO jabatan (id_karyawan, jabatan, dari_tanggal, sampai_tanggal) VALUES (?, ?, ?, ?)";
         PreparedStatement insertStatement = koneksi.prepareStatement(insertSQL);
@@ -244,10 +248,11 @@ try {
         insertStatement.setString(3, formattedDateDariTanggal);
         insertStatement.setString(4, formattedDateSampaiTanggal);
         insertStatement.executeUpdate();
+        koneksi.close();
+    dispose();
     }
 
-    koneksi.close();
-    dispose();
+
 } catch (SQLException ex) {
     System.err.println(ex.getMessage());
 }
@@ -262,6 +267,10 @@ try {
         
     Date selectedDateDariTanggal = dariTanggalDatePicker.getDate();
     Date selectedDateSampaiTanggal = sampaiTanggalDatePicker.getDate();
+    if (jabatanTextField.getText().equals("") || selectedDateDariTanggal == null || selectedDateSampaiTanggal == null) {
+    JOptionPane.showMessageDialog(null, "Data Belum Lengkap");
+    return;
+}
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     String formattedDateDariTanggal = sdf.format(selectedDateDariTanggal);
     String formattedDateSampaiTanggal = sdf.format(selectedDateSampaiTanggal);

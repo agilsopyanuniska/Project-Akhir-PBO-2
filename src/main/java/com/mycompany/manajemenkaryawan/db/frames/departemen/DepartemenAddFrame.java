@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -144,7 +145,11 @@ public class DepartemenAddFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanButtonActionPerformed
-        if(idDepartemenTextField.getText().equals("")){
+        if(namaDepartemenTextField.getText().equals("")){
+    JOptionPane.showMessageDialog(null, "Data Belum Lengkap");
+
+        }
+        else if(idDepartemenTextField.getText().equals("")){
             try {
                 Connection koneksi = Basisdata.getConnection();
                 String insertSQL = "INSERT INTO departemen SET nama_departemen = '" +

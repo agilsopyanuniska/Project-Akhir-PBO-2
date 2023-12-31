@@ -255,6 +255,10 @@ public class DepartemenManajerAddFrame extends javax.swing.JFrame {
     private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanButtonActionPerformed
         Date selectedDateDariTanggal = dariTanggalDatePicker.getDate();
         Date selectedDateSampaiTanggal = sampaiTanggalDatePicker.getDate();
+        if (selectedDateDariTanggal == null || selectedDateSampaiTanggal == null) {
+    JOptionPane.showMessageDialog(null, "Data Belum Lengkap");
+    return;
+}
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDateDariTanggal = sdf1.format(selectedDateDariTanggal);
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
@@ -278,7 +282,7 @@ insertStatement.executeUpdate(insertSQL);
     koneksi.close();
     dispose(); 
     }else{
-           JOptionPane.showMessageDialog(null, "Data sudah ada!");
+           JOptionPane.showMessageDialog(null, "Departemen sudah ada!");
     }
     
 
@@ -290,6 +294,10 @@ insertStatement.executeUpdate(insertSQL);
     private void ubahButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ubahButtonActionPerformed
         Date selectedDateDariTanggal = dariTanggalDatePicker.getDate();
         Date selectedDateSampaiTanggal = sampaiTanggalDatePicker.getDate();
+        if (selectedDateDariTanggal == null || selectedDateSampaiTanggal == null) {
+    JOptionPane.showMessageDialog(null, "Data Belum Lengkap");
+    return;
+}
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDateDariTanggal = sdf1.format(selectedDateDariTanggal);
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");

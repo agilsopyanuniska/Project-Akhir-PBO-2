@@ -229,13 +229,17 @@ public class KaryawanAddFrame extends javax.swing.JFrame {
     private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanButtonActionPerformed
         Date selectedDateTanggalLahir = tanggalLahirDatePicker.getDate();
         Date selectedDateTanggalMasuk = tanggalMasukDatePicker.getDate();
+        if (selectedDateTanggalLahir == null || selectedDateTanggalMasuk == null) {
+    JOptionPane.showMessageDialog(null, "Data Belum Lengkap");
+    return;
+}
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDateTanggalLahir = sdf1.format(selectedDateTanggalLahir);
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDateTanggalMasuk = sdf2.format(selectedDateTanggalMasuk);
         
-        if(namaDepanTextField.getText().equals("") || namaBelakangTextField.getText().equals("") || genderComboBox.getSelectedItem() == null || tanggalLahirDatePicker.getDate() == null || tanggalMasukDatePicker.getDate() == null){
-    JOptionPane.showMessageDialog(null, "Data tidak boleh kosong!");
+    if(namaDepanTextField.getText().equals("") || namaBelakangTextField.getText().equals("")){
+    JOptionPane.showMessageDialog(null, "Data Belum Lengkap");
 } else if(idKaryawanTextField.getText().equals("")){
             try {
                 
@@ -272,42 +276,7 @@ public class KaryawanAddFrame extends javax.swing.JFrame {
                 System.err.println(ex.getMessage());
             }
         }
-//        if(idKaryawanTextField.getText().equals("")){
-//            try {
-//                
-//                Connection koneksi = Basisdata.getConnection();
-//               String insertSQL = "INSERT INTO karyawan SET " +
-//"tanggal_lahir = '" + formattedDateTanggalLahir +"'," +
-//"nama_depan = '" + namaDepanTextField.getText() +"'," +
-//"nama_belakang = '" + namaBelakangTextField.getText() +"'," +
-//"gender = '" + genderComboBox.getSelectedItem() +"'," +
-//"tanggal_masuk = '" + formattedDateTanggalMasuk +"'";
-//                Statement statement = koneksi.createStatement();
-//                statement.executeUpdate(insertSQL);
-//                koneksi.close();
-//                dispose();
-//            } catch (SQLException ex) {
-//                System.err.println(ex.getMessage());
-//            }
-//        } 
-//        else {
-//            try {
-//                Connection koneksi = Basisdata.getConnection();
-//                String updateSQL = "UPDATE karyawan SET " +
-//"tanggal_lahir = '" + formattedDateTanggalLahir +"'," +
-//"nama_depan = '" + namaDepanTextField.getText() +"'," +
-//"nama_belakang = '" + namaBelakangTextField.getText() +"'," +
-//"gender = '" + genderComboBox.getSelectedItem() +"'," +
-//"tanggal_masuk = '" + formattedDateTanggalMasuk +"' " +
-//"WHERE id_karyawan = " + idKaryawanTextField.getText();
-//                Statement statement = koneksi.createStatement();
-//                statement.executeUpdate(updateSQL);
-//                koneksi.close();
-//                dispose();
-//            } catch (SQLException ex) {
-//                System.err.println(ex.getMessage());
-//            }
-//        }
+
         
         
 
